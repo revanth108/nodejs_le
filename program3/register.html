@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Simple E-Commerce</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        input {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Register</h1>
+
+        <ul>
+            <li class="a"><a href="home.html">Home</a></li>
+            <li class="a"><a href="catalog.html">Catalog</a></li>
+            <li class="a"><a href="cart.html">Cart</a></li>
+            <li class="a"><a href="login.html">Login</a></li>
+        </ul>
+    </header>
+
+    <main>
+        <h2>Create a New Account</h2>
+
+        <form onsubmit="return validateRegister()">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+            <span id="usernameError" class="error"></span>
+            <br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+            <span id="emailError" class="error"></span>
+            <br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+            <span id="passwordError" class="error"></span>
+            <br>
+
+            <button type="submit">Register</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Simple E-Commerce Site</p>
+    </footer>
+
+    <script>
+        function validateRegister() {
+            let username = document.getElementById("username").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value;
+
+            document.getElementById("usernameError").textContent = "";
+            document.getElementById("emailError").textContent = "";
+            document.getElementById("passwordError").textContent = "";
+
+            let valid = true;
+
+            // Username validation
+            if (username === "") {
+                document.getElementById("usernameError").textContent =
+                    "Username is required";
+                valid = false;
+            } else if (username.length < 3) {
+                document.getElementById("usernameError").textContent =
+                    "Minimum 3 characters";
+                valid = false;
+            }
+
+            // Email validation
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (email === "") {
+                document.getElementById("emailError").textContent =
+                    "Email is required";
+                valid = false;
+            } else if (!emailPattern.test(email)) {
+                document.getElementById("emailError").textContent =
+                    "Enter a valid email";
+                valid = false;
+            }
+
+            // Password validation
+            if (password === "") {
+                document.getElementById("passwordError").textContent =
+                    "Password is required";
+                valid = false;
+            } else if (password.length < 6) {
+                document.getElementById("passwordError").textContent =
+                    "Minimum 6 characters";
+                valid = false;
+            }
+
+            return valid;
+        }
+    </script>
+</body>
+</html>
